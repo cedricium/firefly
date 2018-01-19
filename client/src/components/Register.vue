@@ -3,38 +3,40 @@
     <div class="container">
       <div class="columns">
         <div class="column is-4 is-offset-4">
-          <h1 class="title is-1 has-text-centered">Register</h1>
-          <b-field label="Email">
-            <b-input
-              icon-pack="fa"
-              icon="envelope"
-              type="email"
-              name="email"
-              v-model="email"
-              placeholder="johndoe@example.com">
-            </b-input>
-          </b-field>
-          <b-field label="Password">
-            <b-input
-              icon-pack="fa"
-              icon="unlock"
-              type="password"
-              name="password"
-              v-model="password"
-              placeholder="••••••••"
-              password-reveal>
-            </b-input>
-          </b-field>
-          <b-notification
-            type="is-danger"
-            v-text="error"
-            :active.sync="isActive">
-          </b-notification>
-          <button
-            class="button is-medium"
-            @click="register">
-            Register
-          </button>
+          <div class="box">
+            <h1 class="title is-1 has-text-centered">Register</h1>
+            <b-field label="Email">
+              <b-input
+                icon-pack="fa"
+                icon="envelope"
+                type="email"
+                name="email"
+                v-model="email"
+                placeholder="johndoe@example.com">
+              </b-input>
+            </b-field>
+            <b-field label="Password">
+              <b-input
+                icon-pack="fa"
+                icon="unlock"
+                type="password"
+                name="password"
+                v-model="password"
+                placeholder="••••••••"
+                password-reveal>
+              </b-input>
+            </b-field>
+            <b-notification
+              type="is-danger"
+              v-text="error"
+              :active.sync="isActive">
+            </b-notification>
+            <button
+              class="button is-primary is-medium is-fullwidth"
+              @click="register">
+              Register
+            </button>
+          </div>
         </div>
       </div>
     </div>
