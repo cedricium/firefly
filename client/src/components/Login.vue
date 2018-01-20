@@ -4,7 +4,7 @@
       <div class="columns">
         <div class="column is-4 is-offset-4">
           <div class="box">
-            <h1 class="title is-1 has-text-centered">Register</h1>
+            <h1 class="title is-1 has-text-centered">Login</h1>
             <b-field label="Email">
               <b-input
                 size="is-medium"
@@ -24,8 +24,7 @@
                 type="password"
                 name="password"
                 v-model="password"
-                placeholder="••••••••"
-                password-reveal>
+                placeholder="••••••••">
               </b-input>
             </b-field>
             <b-notification
@@ -35,8 +34,8 @@
             </b-notification>
             <button
               class="button is-primary is-medium is-fullwidth"
-              @click="register">
-              Register
+              @click="login">
+              Login
             </button>
           </div>
         </div>
@@ -58,9 +57,9 @@ export default {
     };
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        const response = await AuthenticationService.register({
+        const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
         });
