@@ -27,6 +27,9 @@
                 placeholder="••••••••">
               </b-input>
             </b-field>
+            <div class="content">
+              <router-link :to="{name: ''}">Forgot password?</router-link>
+            </div>
             <b-notification
               type="is-danger"
               v-text="error"
@@ -37,6 +40,9 @@
               @click="login">
               Login
             </button>
+          </div>
+          <div class="content has-text-centered">
+            Don't have an account? <router-link :to="{name: 'register'}">Register</router-link>
           </div>
         </div>
       </div>
@@ -63,7 +69,8 @@ export default {
           email: this.email,
           password: this.password
         });
-        console.log(response.data);
+        this.$store.dispatch('setToken', response.data.token);
+        this.$store.dispatch('setUser', response.data.user);
         this.isActive = false;
       } catch (error) {
         this.error = error.response.data.error;

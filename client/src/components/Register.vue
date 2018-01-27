@@ -39,6 +39,9 @@
               Register
             </button>
           </div>
+          <div class="content has-text-centered">
+            Already have an account? <router-link :to="{name: 'login'}">Login</router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -64,7 +67,8 @@ export default {
           email: this.email,
           password: this.password
         });
-        console.log(response.data);
+        this.$store.dispatch('setToken', response.data.token);
+        this.$store.dispatch('setUser', response.data.user);
         this.isActive = false;
       } catch (error) {
         this.error = error.response.data.error;
