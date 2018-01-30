@@ -18,9 +18,18 @@
               </div>
               <div class="card-content">
                 <div class="content">
-                  <p><strong v-text="site.title"></strong></p>
+                  <p class="title-tags"><strong v-text="site.title"></strong></p>
                   <p>by <router-link :to="{name: ''}"> {{site.created_by }}</router-link> from <span v-text="site.user_location"></span></p>
                   <p>added on {{ site.createdAt | formatDate }}</p>
+                </div>
+                <div>
+                  <b-taglist>
+                    <b-tag
+                      v-for="tag in site.tags"
+                      v-bind:key="tag"
+                      v-text="tag">
+                    </b-tag>
+                  </b-taglist>
                 </div>
               </div>
             </div>
@@ -44,6 +53,15 @@
                   <p>by <router-link :to="{name: ''}"> {{site.created_by }}</router-link> from <span v-text="site.user_location"></span></p>
                   <p>added on {{ site.createdAt | formatDate }}</p>
                 </div>
+                <div>
+                  <b-taglist>
+                    <b-tag
+                      v-for="tag in site.tags"
+                      v-bind:key="tag"
+                      v-text="tag">
+                    </b-tag>
+                  </b-taglist>
+                </div>
               </div>
             </div>
           </div>
@@ -65,6 +83,15 @@
                   <p><strong v-text="site.title"></strong></p>
                   <p>by <router-link :to="{name: ''}"> {{site.created_by }}</router-link> from <span v-text="site.user_location"></span></p>
                   <p>added on {{ site.createdAt | formatDate }}</p>
+                </div>
+                <div>
+                  <b-taglist>
+                    <b-tag
+                      v-for="tag in site.tags"
+                      v-bind:key="tag"
+                      v-text="tag">
+                    </b-tag>
+                  </b-taglist>
                 </div>
               </div>
             </div>
@@ -122,6 +149,19 @@ export default {
 </script>
 
 <style scoped>
+
+.title-tags {
+  display: flex;
+  flex-flow: row nowrap;
+  /* justify-content: space-between;
+  align-content: space-between;
+  align-items: flex-start; */
+}
+
+.title-tags * {
+  flex: 1 1;
+}
+
 div.card {
   margin: 0 0 1rem 0;
 }
