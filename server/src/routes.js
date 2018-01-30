@@ -17,4 +17,7 @@ module.exports = (app) => {
   app.post('/sites',
     SitesController.post
   );
+  app.delete('/sites/:siteId',
+    SitesController.delete
+  );
 };
