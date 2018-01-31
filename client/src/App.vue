@@ -24,6 +24,10 @@ export default {
   color: #2c3e50;
 }
 
+html {
+  padding-top: 3.25rem;
+}
+
 html,
 body {
   background: #f9f9f9;
