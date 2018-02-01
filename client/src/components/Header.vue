@@ -13,22 +13,50 @@
 
     <div id="navbarExampleTransparentExample" class="navbar-menu">
       <div class="navbar-start">
-        <router-link class="navbar-item" :to="{name: 'sites'}">
-          Browse
-        </router-link>
-        <div class="navbar-item"
-          v-show="$store.state.isUserLoggedIn">
-          <div class="field is-grouped">
-            <div class="control">
-              <router-link class="button" :to="{name: ''}">
-                Add Site
-              </router-link>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="navbar-end">
+        <div class="navbar-item custom-grouped">
+          <router-link class="button is-white" :to="{name: 'home'}">
+            <b-icon
+              pack="fa"
+              icon="home">
+            </b-icon>
+            <span>Home</span>
+          </router-link>
+        </div>
+        <div class="navbar-item custom-grouped">
+          <router-link class="button is-white" :to="{name: 'sites'}">
+            <b-icon
+              pack="fa"
+              icon="compass">
+            </b-icon>
+            <span>Explore</span>
+          </router-link>
+        </div>
+        <div class="navbar-item custom-grouped"
+          v-show="$store.state.isUserLoggedIn">
+          <router-link class="button is-white" :to="{name: ''}">
+            <b-icon
+              pack="fa"
+              icon="user">
+            </b-icon>
+            <span>Profile</span>
+          </router-link>
+        </div>
+        <div class="navbar-item custom-grouped custom-grouped__last"
+          v-show="$store.state.isUserLoggedIn">
+          <button
+            class="button is-primary"
+            @click="isCardModalActive = true">
+            <b-icon
+              size="is-small"
+              pack="fa"
+              icon="plus">
+            </b-icon>
+            <span>Add Site</span>
+          </button>
+        </div>
         <div class="navbar-item"
           v-show="!$store.state.isUserLoggedIn">
           <div class="field is-grouped">
@@ -68,5 +96,20 @@ document.addEventListener('DOMContentLoaded', function () {
 <style scoped>
 nav.navbar {
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+.navbar-item.custom-grouped {
+  padding: 8px 4px;
+}
+
+.navbar-item.custom-grouped__last {
+  padding-right: 16px;
+}
+
+/* Reset padding to original state to properly align in hamburger menu */
+@media screen and (max-width: 1020px) {
+  .navbar-item.custom-grouped {
+    padding: 8px 16px;
+  }
 }
 </style>
