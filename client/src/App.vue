@@ -32,4 +32,8 @@ html,
 body {
   background: #f9f9f9;
 }
+
+div.modal {
+  z-index: 50;
+}
 </style>

@@ -48,7 +48,7 @@
           v-show="$store.state.isUserLoggedIn">
           <button
             class="button is-primary"
-            @click="isCardModalActive = true">
+            @click="cardModal">
             <b-icon
               size="is-small"
               pack="fa"
@@ -78,6 +78,28 @@
 </template>
 
 <script>
+import AddSite from './AddSite';
+
+export default {
+  data () {
+    return {
+      isCardModalActive: false,
+      formProps: {
+        email: 'hell@cedricmaya.me'
+      }
+    };
+  },
+  methods: {
+    cardModal () {
+      this.$modal.open({
+        parent: this,
+        component: AddSite,
+        hasModalCard: true
+      });
+    }
+  }
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   let $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
   if ($navbarBurgers.length > 0) {
