@@ -8,6 +8,9 @@
         <b-field label="Title">
           <b-input
             v-model="site.title"
+            placeholder="Example"
+            icon="info"
+            icon-pack="fa"
             required>
           </b-input>
         </b-field>
@@ -15,6 +18,9 @@
         <b-field label="Your Name">
           <b-input
             v-model="site.created_by"
+            placeholder="Jane Smith"
+            icon="user"
+            icon-pack="fa"
             required>
           </b-input>
         </b-field>
@@ -27,35 +33,12 @@
             icon="globe"
             icon-pack="fa"
             required>
-            <option>Argentina</option>
-            <option>Australia</option>
-            <option>Austria</option>
-            <option>Belarus</option>
-            <option>Belgium</option>
-            <option>Belize</option>
-            <option>Brazil</option>
-            <option>Peru</option>
-            <option>Philippines</option>
-            <option>Pitcairn</option>
-            <option>Poland</option>
-            <option>Portugal</option>
-            <option>Puerto Rico</option>
-            <option>Qatar</option>
-            <option>Réunion</option>
-            <option>Romania</option>
-            <option>Russian Federation</option>
-            <option>Rwanda</option>
-            <option>Swaziland</option>
-            <option>Sweden</option>
-            <option>Switzerland</option>
-            <option>Syrian Arab Republic</option>
-            <option>Taiwan, Province of China</option>
-            <option>Tajikistan</option>
-            <option>Tanzania, United Republic of</option>
-            <option>Ukraine</option>
-            <option>United Arab Emirates</option>
-            <option>United Kingdom</option>
-            <option>United States</option>
+            <option
+              v-for="country in countries"
+              v-bind:key="country.code"
+              :value="country.name"
+              v-text="country.name">
+            </option>
           </b-select>
         </b-field>
 
@@ -63,6 +46,9 @@
           <b-input
             v-model="site.site_url"
             type="url"
+            placeholder="http://www.example.org"
+            icon="link"
+            icon-pack="fa"
             required>
           </b-input>
         </b-field>
@@ -71,6 +57,9 @@
           <b-input
             v-model="site.site_screenshot"
             type="url"
+            placeholder="http://example.org/image.png"
+            icon="image"
+            icon-pack="fa"
             required>
           </b-input>
         </b-field>
@@ -79,6 +68,8 @@
           <b-taginput
             maxtags="3"
             type="is-primary"
+            icon="tags"
+            icon-pack="fa"
             required>
           </b-taginput>
         </b-field>
@@ -102,6 +93,7 @@
 
 <script>
 import SitesService from '@/services/SitesService';
+import CountryList from '@/assets/countries.json';
 
 export default {
   data () {
@@ -113,11 +105,23 @@ export default {
         site_screenshot: null,
         site_url: null,
         tags: {}
-      }
+      },
+      countries: CountryList,
+      error: null
     };
   },
   methods: {
     async create () {
+      this.error = null;
+      const allFieldsFilledIn = Object
+        .keys(this.site)
+        .every(key => !!this.site[key]);
+
+      if (!allFieldsFilledIn) {
+        this.error = 'Please fill in all the required fields.';
+        return;
+      }
+
       try {
         await SitesService.post(this.site);
         this.$parent.close();
