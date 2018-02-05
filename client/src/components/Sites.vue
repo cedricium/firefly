@@ -8,7 +8,8 @@
               v-for="site in col1Sites"
               v-bind:key="site.id">
               <div class="card-image">
-                <router-link :to="{name: 'site', params: { siteTitle: parseTitle(site.title) }}">
+                <router-link :to="{name: 'site',
+                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
                   <figure class="image is-16by9">
                     <img :src="site.site_screenshot" alt="Placeholder image">
                     <div class="overlay">
@@ -39,7 +40,8 @@
               v-for="site in col2Sites"
               v-bind:key="site.id">
               <div class="card-image">
-                <router-link :to="{name: 'site', params: { siteTitle: parseTitle(site.title) }}">
+                <router-link :to="{name: 'site',
+                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
                   <figure class="image is-16by9">
                     <img :src="site.site_screenshot" alt="Placeholder image">
                     <div class="overlay">
@@ -70,7 +72,8 @@
               v-for="site in col3Sites"
               v-bind:key="site.id">
               <div class="card-image">
-                <router-link :to="{name: 'site', params: { siteTitle: parseTitle(site.title) }}">
+                <router-link :to="{name: 'site',
+                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
                   <figure class="image is-16by9">
                     <img :src="site.site_screenshot" alt="Placeholder image">
                     <div class="overlay">

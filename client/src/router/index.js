@@ -4,7 +4,7 @@ import HelloWorld from '@/components/HelloWorld';
 import Register from '@/components/Register';
 import Login from '@/components/Login';
 import Sites from '@/components/Sites';
-import Site from '@/components/Site';
+import ViewSite from '@/components/ViewSite';
 
 Vue.use(Router);
 
@@ -33,7 +33,7 @@ export default new Router({
     {
       path: '/sites/:siteTitle',
       name: 'site',
-      component: Site
+      component: ViewSite
     }
   ]
 });
