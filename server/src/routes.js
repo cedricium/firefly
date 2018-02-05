@@ -5,19 +5,16 @@ const SitesController = require('./controllers/SitesController');
 module.exports = (app) => {
   app.post('/register',
     AuthenticationControllerPolicy.register,
-    AuthenticationController.register
-  );
+    AuthenticationController.register);
   app.post('/login',
-    AuthenticationController.login
-  );
+    AuthenticationController.login);
 
   app.get('/sites',
-    SitesController.index
-  );
+    SitesController.index);
+  app.get('/sites/:siteId',
+    SitesController.show);
   app.post('/sites',
-    SitesController.post
-  );
+    SitesController.post);
   app.delete('/sites/:siteId',
-    SitesController.delete
-  );
+    SitesController.delete);
 };

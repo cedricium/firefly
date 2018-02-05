@@ -13,6 +13,16 @@ module.exports = {
       });
     }
   },
+  async show (req, res) {
+    try {
+      const site = await Site.findById(req.params.siteId);
+      res.send(site);
+    } catch (err) {
+      res.status(500).send({
+        error: 'An error occurred trying to fetch the site.'
+      });
+    }
+  },
   async post (req, res) {
     try {
       const site = await Site.create(req.body);
