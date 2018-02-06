@@ -123,10 +123,14 @@ export default {
       }
 
       try {
-        await SitesService.post(this.site);
+        const site = (await SitesService.post(this.site)).data;
         this.$parent.close();
         this.$router.push({
-          name: 'sites'
+          name: 'site',
+          params: {
+            siteTitle: site.title,
+            siteId: site.id
+          }
         });
       } catch (err) {
         console.log(err);
