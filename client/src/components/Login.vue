@@ -72,6 +72,7 @@ export default {
         this.$store.dispatch('setToken', response.data.token);
         this.$store.dispatch('setUser', response.data.user);
         this.isActive = false;
+        this.$router.push({name: 'sites'});
       } catch (error) {
         this.error = error.response.data.error;
         this.isActive = true;
