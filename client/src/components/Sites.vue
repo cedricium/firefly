@@ -28,7 +28,8 @@
                     <b-tag
                       v-for="tag in site.tags"
                       v-bind:key="tag"
-                      v-text="tag">
+                      v-text="tag"
+                      type="is-primary">
                     </b-tag>
                   </b-taglist>
                 </div>
@@ -60,7 +61,8 @@
                     <b-tag
                       v-for="tag in site.tags"
                       v-bind:key="tag"
-                      v-text="tag">
+                      v-text="tag"
+                      type="is-primary">
                     </b-tag>
                   </b-taglist>
                 </div>
@@ -92,7 +94,8 @@
                     <b-tag
                       v-for="tag in site.tags"
                       v-bind:key="tag"
-                      v-text="tag">
+                      v-text="tag"
+                      type="is-primary">
                     </b-tag>
                   </b-taglist>
                 </div>
