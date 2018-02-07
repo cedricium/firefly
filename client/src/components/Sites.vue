@@ -120,22 +120,26 @@ export default {
   },
   async mounted () {
     this.sites = (await SitesService.index()).data;
-    console.log(this.sites);
   },
   computed: {
     col1Sites () {
-      return this.sites.filter((el, index, array) => {
+      return this.sortSites.filter((el, index, array) => {
         return (index % 3 === 0);
       });
     },
     col2Sites () {
-      return this.sites.filter((el, index, array) => {
+      return this.sortSites.filter((el, index, array) => {
         return (index % 3 === 1);
       });
     },
     col3Sites () {
-      return this.sites.filter((el, index, array) => {
+      return this.sortSites.filter((el, index, array) => {
         return (index % 3 === 2);
+      });
+    },
+    sortSites () {
+      return this.sites.sort((a, b) => {
+        return a - b;
       });
     }
   },
@@ -155,13 +159,9 @@ export default {
 </script>
 
 <style scoped>
-
 .title-tags {
   display: flex;
   flex-flow: row nowrap;
-  /* justify-content: space-between;
-  align-content: space-between;
-  align-items: flex-start; */
 }
 
 .title-tags * {
