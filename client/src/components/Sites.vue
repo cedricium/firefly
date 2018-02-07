@@ -138,7 +138,7 @@ export default {
       });
     },
     sortSites () {
-      return this.sites.sort((a, b) => {
+      return this.sites.slice(0).sort((a, b) => {
         return a - b;
       });
     }
