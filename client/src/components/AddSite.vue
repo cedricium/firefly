@@ -66,6 +66,7 @@
 
         <b-field label="Tags">
           <b-taginput
+            v-model="site.tags"
             maxtags="3"
             type="is-primary"
             icon="tags"
@@ -104,7 +105,7 @@ export default {
         user_location: null,
         site_screenshot: null,
         site_url: null,
-        tags: {}
+        tags: null
       },
       countries: CountryList,
       error: null
