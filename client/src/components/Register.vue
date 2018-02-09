@@ -5,6 +5,16 @@
         <div class="column is-4 is-offset-4">
           <div class="box">
             <h1 class="title is-1 has-text-centered">Register</h1>
+            <b-field label="Name">
+              <b-input
+                size="is-medium"
+                icon-pack="fa"
+                icon="user"
+                name="name"
+                v-model="name"
+                placeholder="Jane Smith">
+              </b-input>
+            </b-field>
             <b-field label="Email">
               <b-input
                 size="is-medium"
@@ -54,6 +64,7 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
   data () {
     return {
+      name: '',
       email: '',
       password: '',
       error: null,
@@ -64,6 +75,7 @@ export default {
     async register () {
       try {
         const response = await AuthenticationService.register({
+          name: this.name,
           email: this.email,
           password: this.password
         });
