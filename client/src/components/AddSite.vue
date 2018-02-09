@@ -15,16 +15,6 @@
           </b-input>
         </b-field>
 
-        <b-field label="Your Name">
-          <b-input
-            v-model="site.created_by"
-            placeholder="Jane Smith"
-            icon="user"
-            icon-pack="fa"
-            required>
-          </b-input>
-        </b-field>
-
         <b-field label="Your Country">
           <b-select
             v-model="site.user_location"
@@ -101,7 +91,7 @@ export default {
     return {
       site: {
         title: null,
-        created_by: null,
+        created_by: this.$store.state.user.name,
         user_location: null,
         site_screenshot: null,
         site_url: null,
