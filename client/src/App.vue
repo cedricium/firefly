@@ -36,4 +36,8 @@ body {
 div.modal {
   z-index: 50;
 }
+
+div.dropdown-menu {
+  padding-top: 0 !important;
+}
 </style>

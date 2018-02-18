@@ -34,16 +34,40 @@
             <span>Explore</span>
           </router-link>
         </div>
-        <div class="navbar-item custom-grouped"
+        <b-dropdown
+          class="navbar-item custom-grouped"
+          hoverable
           v-show="$store.state.isUserLoggedIn">
-          <router-link class="button is-white" :to="{name: ''}">
+          <button class="button is-white" slot="trigger">
             <b-icon
               pack="fa"
               icon="user">
             </b-icon>
             <span>Profile</span>
-          </router-link>
-        </div>
+            <b-icon
+              pack="fa"
+              icon="caret-down">
+            </b-icon>
+          </button>
+          <b-dropdown-item has-link>
+            <router-link :to="{name: ''}">
+              <b-icon
+                pack="fa"
+                icon="star">
+              </b-icon>
+              <span>Favorites</span>
+            </router-link>
+          </b-dropdown-item>
+          <b-dropdown-item has-link>
+            <router-link :to="{name: ''}">
+              <b-icon
+                pack="fa"
+                icon="gear">
+              </b-icon>
+              <span>Account</span>
+            </router-link>
+          </b-dropdown-item>
+        </b-dropdown>
         <div class="navbar-item custom-grouped custom-grouped__last"
           v-show="$store.state.isUserLoggedIn">
           <button
