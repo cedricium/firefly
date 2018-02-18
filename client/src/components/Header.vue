@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-fixed-top is-transparent">
     <div class="navbar-brand">
-      <router-link class="navbar-item" :to="{name: 'home'}">
+      <router-link class="navbar-item" :to="{name: 'sites'}">
         <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
       </router-link>
       <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
@@ -17,21 +17,13 @@
 
       <div class="navbar-end">
         <div class="navbar-item custom-grouped">
-          <router-link class="button is-white" :to="{name: 'home'}">
+          <router-link class="button is-white" :to="{name: 'sites'}">
             <b-icon
+              size="is-small"
               pack="fa"
               icon="home">
             </b-icon>
             <span>Home</span>
-          </router-link>
-        </div>
-        <div class="navbar-item custom-grouped">
-          <router-link class="button is-white" :to="{name: 'sites'}">
-            <b-icon
-              pack="fa"
-              icon="compass">
-            </b-icon>
-            <span>Explore</span>
           </router-link>
         </div>
         <b-dropdown
@@ -40,6 +32,7 @@
           v-show="$store.state.isUserLoggedIn">
           <button class="button is-white" slot="trigger">
             <b-icon
+              size="is-small"
               pack="fa"
               icon="user">
             </b-icon>

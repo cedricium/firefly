@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
 import Register from '@/components/Register';
 import Login from '@/components/Login';
 import Sites from '@/components/Sites';
@@ -12,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HelloWorld
+      name: 'sites',
+      component: Sites
     },
     {
       path: '/register',
@@ -24,11 +23,6 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
-    },
-    {
-      path: '/sites',
-      name: 'sites',
-      component: Sites
     },
     {
       path: '/sites/:siteTitle',
