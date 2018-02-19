@@ -1,7 +1,9 @@
-<h1 align="center">firefly</h1>
+<p align="center">
+  <img src="./client/src/assets/firefly_logo.png" height="108">
+</p>
 <h4 align="center">Vue.js / Express.js Fullstack Web Application</h4>
 
-Firefly is a fullstack web application clone of [Awwwards](https://www.awwwards.com) and [siteInspire](http://www.siteinspire.com) who's purpose is to **"shed light on inspiring sites from around the web"**. Firefly was a testbed for me to practice and gain experience using a JavaScript framework (Vue.js) as well as continue honing my general web development skills. As many of you may have guessed, firefly is in fact named after the greatest sci-fi Western show in existence with the same name, [Firefly](https://en.wikipedia.org/wiki/Firefly_(TV_series)).
+Firefly is a fullstack web application clone of [Awwwards](https://www.awwwards.com), [siteInspire](http://www.siteinspire.com), [lapa](https://www.lapa.ninja/), and [Land-book](https://land-book.com/) who's purpose is to **"shed light on inspiring sites from around the web"**. Firefly was a testbed for me to practice and gain experience using a JavaScript framework (Vue.js) as well as allowing me to further develop my general web development skills. As you may have guessed, Firefly is in fact named after the greatest sci-fi Western show in existence with the same name, [Firefly](https://en.wikipedia.org/wiki/Firefly_(TV_series)).
 
 ## Getting Started
 
