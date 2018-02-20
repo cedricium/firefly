@@ -37,6 +37,10 @@ div.modal {
   z-index: 50;
 }
 
+div.card {
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+
 div.dropdown-menu {
   padding-top: 0 !important;
 }
