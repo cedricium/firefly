@@ -2,7 +2,7 @@
   <div>
     <section class="section">
       <div class="container">
-        <div class="columns">
+        <div class="columns is-4 is-variable">
           <div class="column is-4">
             <div class="card"
               v-for="site in col1Sites"
@@ -12,26 +12,16 @@
                   params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
                   <figure class="image is-16by9">
                     <img :src="site.site_screenshot" alt="Placeholder image">
-                    <div class="overlay">
-                    </div>
                   </figure>
                 </router-link>
               </div>
               <div class="card-content">
                 <div class="content">
-                  <p class="title-tags"><strong v-text="site.title"></strong></p>
-                  <p>by <router-link :to="{name: ''}"> {{site.created_by }}</router-link> from <span v-text="site.user_location"></span></p>
-                  <p>added on {{ site.createdAt | formatDate }}</p>
-                </div>
-                <div>
-                  <b-taglist>
-                    <b-tag
-                      v-for="tag in site.tags"
-                      v-bind:key="tag"
-                      v-text="tag"
-                      type="is-primary">
-                    </b-tag>
-                  </b-taglist>
+                  <router-link :to="{name: 'site',
+                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
+                    <strong v-text="site.title"></strong>
+                  </router-link>
+                  <p class="date is-size-7">added {{ site.createdAt | formatDate }}</p>
                 </div>
               </div>
             </div>
@@ -45,26 +35,16 @@
                   params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
                   <figure class="image is-16by9">
                     <img :src="site.site_screenshot" alt="Placeholder image">
-                    <div class="overlay">
-                    </div>
                   </figure>
                 </router-link>
               </div>
               <div class="card-content">
                 <div class="content">
-                  <p><strong v-text="site.title"></strong></p>
-                  <p>by <router-link :to="{name: ''}"> {{site.created_by }}</router-link> from <span v-text="site.user_location"></span></p>
-                  <p>added on {{ site.createdAt | formatDate }}</p>
-                </div>
-                <div>
-                  <b-taglist>
-                    <b-tag
-                      v-for="tag in site.tags"
-                      v-bind:key="tag"
-                      v-text="tag"
-                      type="is-primary">
-                    </b-tag>
-                  </b-taglist>
+                  <router-link :to="{name: 'site',
+                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
+                    <strong v-text="site.title"></strong>
+                  </router-link>
+                  <p class="date is-size-7">added {{ site.createdAt | formatDate }}</p>
                 </div>
               </div>
             </div>
@@ -78,26 +58,16 @@
                   params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
                   <figure class="image is-16by9">
                     <img :src="site.site_screenshot" alt="Placeholder image">
-                    <div class="overlay">
-                    </div>
                   </figure>
                 </router-link>
               </div>
               <div class="card-content">
                 <div class="content">
-                  <p><strong v-text="site.title"></strong></p>
-                  <p>by <router-link :to="{name: ''}"> {{site.created_by }}</router-link> from <span v-text="site.user_location"></span></p>
-                  <p>added on {{ site.createdAt | formatDate }}</p>
-                </div>
-                <div>
-                  <b-taglist>
-                    <b-tag
-                      v-for="tag in site.tags"
-                      v-bind:key="tag"
-                      v-text="tag"
-                      type="is-primary">
-                    </b-tag>
-                  </b-taglist>
+                  <router-link :to="{name: 'site',
+                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
+                    <strong v-text="site.title"></strong>
+                  </router-link>
+                  <p class="date is-size-7">added {{ site.createdAt | formatDate }}</p>
                 </div>
               </div>
             </div>
@@ -117,9 +87,6 @@ export default {
     return {
       sites: []
     };
-  },
-  async mounted () {
-    this.sites = (await SitesService.index()).data;
   },
   computed: {
     col1Sites () {
@@ -151,7 +118,15 @@ export default {
   filters: {
     formatDate (value) {
       if (value) {
-        return moment(String(value)).format('MMMM Do YYYY');
+        return moment(String(value)).fromNow();
+      }
+    }
+  },
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.sites = (await SitesService.index(value)).data;
       }
     }
   }
@@ -159,42 +134,19 @@ export default {
 </script>
 
 <style scoped>
-.title-tags {
-  display: flex;
-  flex-flow: row nowrap;
-}
-
-.title-tags * {
-  flex: 1 1;
-}
-
 div.card {
-  margin: 0 0 1rem 0;
+  margin: 0 0 2rem 0;
+  transition: all 250ms cubic-bezier(.02,.01,.47,1);
+}
+
+div.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
 }
 
 .card-image {
   position: relative;
 }
 
-.overlay {
-  display: none;
-  position: relative;
-}
-
-.external-link {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-}
-
-.card-image:hover .overlay {
-  width: 100%;
-  height: 100%;
-  background: rgba(42, 40, 41, 0.5);
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  color: #fff;
-}
+p.date { color: rgba(128, 128, 128, 1); }
 </style>

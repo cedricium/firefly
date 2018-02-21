@@ -2,7 +2,7 @@
   <nav class="navbar is-fixed-top is-transparent">
     <div class="navbar-brand">
       <router-link class="navbar-item" :to="{name: 'sites'}">
-        <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+        <img src="@/assets/firefly_logo.png" alt="Firefly: shedding light on inspiring sites from around the web" width="112" height="28">
       </router-link>
       <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
         <span></span>
@@ -17,14 +17,14 @@
 
       <div class="navbar-end">
         <div class="navbar-item custom-grouped">
-          <router-link class="button is-white" :to="{name: 'sites'}">
-            <b-icon
-              size="is-small"
-              pack="fa"
-              icon="home">
-            </b-icon>
-            <span>Home</span>
-          </router-link>
+          <b-field>
+            <b-input placeholder="Search..."
+              v-model="search"
+              @keyup.enter.native="searchSites"
+              icon-pack="fa"
+              icon="search">
+            </b-input>
+          </b-field>
         </div>
         <b-dropdown
           class="navbar-item custom-grouped"
@@ -101,9 +101,7 @@ export default {
   data () {
     return {
       isCardModalActive: false,
-      formProps: {
-        email: 'hell@cedricmaya.me'
-      }
+      search: ''
     };
   },
   methods: {
@@ -113,6 +111,27 @@ export default {
         component: AddSite,
         hasModalCard: true
       });
+    },
+    searchSites () {
+      const route = {
+        name: 'sites'
+      };
+      if (this.search !== '') {
+        route.query = {
+          search: this.search
+        };
+      }
+      this.$router.push(route);
+    }
+  },
+  watch: {
+    '$route.fullPath': {
+      immediate: true,
+      handler (value) {
+        if (value !== `/?search=${this.search}`) {
+          this.search = '';
+        }
+      }
     }
   }
 };

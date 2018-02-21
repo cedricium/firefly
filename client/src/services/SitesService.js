@@ -1,8 +1,12 @@
 import Api from '@/services/Api';
 
 export default {
-  index () {
-    return Api().get('sites');
+  index (searchValue) {
+    return Api().get('sites', {
+      params: {
+        search: searchValue
+      }
+    });
   },
   show (siteId) {
     return Api().get(`sites/${siteId}`);

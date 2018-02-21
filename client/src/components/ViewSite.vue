@@ -109,7 +109,7 @@ p.site-info::before {
   text-transform: uppercase;
   font-size: 0.8rem;
   margin-right: 0.5rem;
-  color: rgba(42, 40, 41, 0.5);
+  color: rgba(128, 128, 128, 0.8);
   font-weight: bold;
 }
 

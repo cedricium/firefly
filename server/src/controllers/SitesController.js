@@ -1,11 +1,29 @@
 const {Site} = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = {
   async index (req, res) {
     try {
-      const sites = await Site.findAll({
-        limit: 20
-      });
+      let sites = null;
+      const search = req.query.search;
+      if (search) {
+        sites = await Site.findAll({
+          where: {
+            [Op.or]: [
+              'title', 'site_url'
+            ].map(key => ({
+              [key]: {
+                [Op.like]: `%${search}%`
+              }
+            }))
+          }
+        });
+      } else {
+        sites = await Site.findAll({
+          limit: 15
+        });
+      }
       res.send(sites);
     } catch (err) {
       res.status(500).send({
