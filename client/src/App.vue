@@ -36,6 +36,8 @@ body {
   background: #f9f9f9;
 }
 
+a:hover { color: hsl(0, 0%, 15%); }
+
 div.modal {
   z-index: 50;
 }

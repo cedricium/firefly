@@ -42,7 +42,7 @@
 footer.footer {
   background: #fff;
   padding-bottom: 2rem;
-  color: rgb(145, 145, 145);
+  color: hsl(0, 0%, 40%);
 }
 
 div.column.about {
@@ -83,7 +83,7 @@ div.column.info * {
 }
 
 div.column.foss span.highlight {
-  color: #2a2829;
+  color: hsl(0, 0%, 15%);
   font-weight: bold;
 }
 
