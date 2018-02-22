@@ -21,7 +21,7 @@
         </small>
       </div>
       <div class="column is-4 info">
-        <a href="https://bulma.io/">
+        <a href="https://bulma.io/" target="_blank">
           <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" height="24" width="128">
         </a>
         <br />
@@ -30,7 +30,7 @@
         </small>
         <br />
         <small>Website content licensed
-          <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+          <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
         </small>
       </div>
     </div>
