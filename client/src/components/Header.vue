@@ -60,6 +60,17 @@
               <span>Account</span>
             </router-link>
           </b-dropdown-item>
+          <b-dropdown-item
+            separator="true">
+          </b-dropdown-item>
+          <b-dropdown-item
+            @click="logout">
+            <b-icon
+              pack="fa"
+              icon="sign-out">
+            </b-icon>
+            <span>Logout</span>
+          </b-dropdown-item>
         </b-dropdown>
         <div class="navbar-item custom-grouped custom-grouped__last"
           v-show="$store.state.isUserLoggedIn">
@@ -122,6 +133,13 @@ export default {
         };
       }
       this.$router.push(route);
+    },
+    logout () {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setUser', null);
+      this.$router.push({
+        name: 'sites'
+      });
     }
   },
   watch: {
