@@ -61,7 +61,7 @@
             </router-link>
           </b-dropdown-item>
           <b-dropdown-item
-            separator="true">
+            separator>
           </b-dropdown-item>
           <b-dropdown-item
             @click="logout">
