@@ -13,6 +13,8 @@ module.exports = (app) => {
     SitesController.index);
   app.get('/sites/:siteId',
     SitesController.show);
+  app.get('/sites/:siteId/related',
+    SitesController.related);
   app.post('/sites',
     SitesController.post);
   app.delete('/sites/:siteId',

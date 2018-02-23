@@ -43,6 +43,27 @@ module.exports = {
       });
     }
   },
+  async related (req, res) {
+    try {
+      const site = await Site.findById(req.params.siteId);
+      const {id, tags} = site;
+      const relatedSites = await Site.findAll({
+        where: {
+          [Op.not]: {id: id},
+          tags: {
+            [Op.or]: tags.map(tag => ({
+              [Op.like]: [`%${tag}%`]
+            }))
+          }
+        }
+      });
+      res.send(relatedSites);
+    } catch (err) {
+      res.status(500).send({
+        error: 'An error occurred trying to fetch the site.'
+      });
+    }
+  },
   async post (req, res) {
     try {
       const site = await Site.create(req.body);
