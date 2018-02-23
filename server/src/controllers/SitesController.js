@@ -11,10 +11,12 @@ module.exports = {
         sites = await Site.findAll({
           where: {
             [Op.or]: [
-              'title', 'site_url'
+              'title', 'site_url', 'tags'
             ].map(key => ({
               [key]: {
-                [Op.like]: `%${search}%`
+                // `search` wrapped in square brackets allows for querying both JSON
+                // and non-JSON columns, fixes #6.
+                [Op.like]: [`%${search}%`]
               }
             }))
           }
