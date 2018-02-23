@@ -146,7 +146,11 @@ export default {
     '$route.fullPath': {
       immediate: true,
       handler (value) {
-        if (value !== `/?search=${this.search}`) {
+        // Encode `this.search` value before checking against the route.fullPath
+        // This encodes ` ` ==> `%20` so checks against the route.fullPath
+        // will be more accurate, fixes #5.
+        const uriEncodedSearchValue = encodeURIComponent(this.search);
+        if (value !== `/?search=${uriEncodedSearchValue}`) {
           this.search = '';
         }
       }
