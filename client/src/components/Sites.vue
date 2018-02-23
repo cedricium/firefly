@@ -148,5 +148,5 @@ div.card:hover {
   position: relative;
 }
 
-p.date { color: rgba(128, 128, 128, 1); }
+p.date { color: hsl(0, 0%, 50%); }
 </style>
