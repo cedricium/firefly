@@ -73,6 +73,35 @@
         </div>
       </div>
     </section>
+    <section class="section" v-if="relatedSites.length > 0">
+      <div class="container">
+        <h2 class="subtitle has-text-centered">Related Sites:</h2>
+        <div class="tile is-ancestor">
+          <div class="tile is-parent is-4"
+            v-for="relatedSite in relatedSites.slice(0, 3)"
+            v-bind:key="relatedSite.id">
+            <div class="tile is-child card">
+              <div class="card-image">
+                <router-link
+                  :to="{ name: 'site', params: { siteId: relatedSite.id, siteTitle: parseTitle(relatedSite.title) }}">
+                  <figure class="image is-16by9" @click="loadSite(relatedSite.id)">
+                    <img :src="relatedSite.site_screenshot" alt="Placeholder image">
+                  </figure>
+                </router-link>
+              </div>
+              <div class="card-content">
+                <div class="content">
+                  <router-link
+                  :to="{ name: 'site', params: { siteId: relatedSite.id, siteTitle: parseTitle(relatedSite.title) }}">
+                    <strong @click="loadSite(relatedSite.id)" v-text="relatedSite.title"></strong>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -83,12 +112,23 @@ import SitesService from '@/services/SitesService';
 export default {
   data () {
     return {
-      site: {}
+      site: {},
+      relatedSites: []
     };
   },
-  async mounted () {
+  mounted () {
     const siteId = this.$store.state.route.params.siteId;
-    this.site = (await SitesService.show(siteId)).data;
+    this.loadSite(siteId);
+  },
+  methods: {
+    parseTitle (title) {
+      return title.replace(/\s+/g, '-').toLowerCase();
+    },
+    async loadSite (id) {
+      const siteId = id;
+      this.site = (await SitesService.show(siteId)).data;
+      this.relatedSites = (await SitesService.related(siteId)).data;
+    }
   },
   filters: {
     formatDate (value) {

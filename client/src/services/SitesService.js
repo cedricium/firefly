@@ -11,6 +11,9 @@ export default {
   show (siteId) {
     return Api().get(`sites/${siteId}`);
   },
+  related (siteId) {
+    return Api().get(`sites/${siteId}/related`);
+  },
   post (site) {
     return Api().post('sites', site);
   }
