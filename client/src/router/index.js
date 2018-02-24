@@ -29,5 +29,8 @@ export default new Router({
       name: 'site',
       component: ViewSite
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  }
 });
