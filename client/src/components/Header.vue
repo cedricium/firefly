@@ -143,6 +143,12 @@ export default {
     }
   },
   watch: {
+    '$route.query.search': {
+      immediate: true,
+      handler (value) {
+        this.search = value;
+      }
+    },
     '$route.fullPath': {
       immediate: true,
       handler (value) {
