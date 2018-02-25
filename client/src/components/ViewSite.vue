@@ -73,7 +73,7 @@
         </div>
       </div>
     </section>
-    <section class="section" v-if="relatedSites.length > 0">
+    <section class="section related-sites" v-if="relatedSites.length > 0">
       <div class="container">
         <h2 class="subtitle has-text-centered">Related Sites:</h2>
         <div class="tile is-ancestor">
@@ -143,6 +143,16 @@ export default {
 <style scoped>
 .card-image {
   padding: 0.8rem;
+}
+
+section.section.related-sites div.card {
+  margin: 0 0 2rem 0;
+  transition: all 250ms cubic-bezier(.02,.01,.47,1);
+}
+
+section.section.related-sites div.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
 }
 
 p.site-info::before {
