@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
+    "heroku-postbuild": "cd ../client/ && npm run build",
+    "start": "src/app.js",
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "author": "Cedric Amaya <amaya.cedric@gmail.com> (http://cedricamaya.me/)",
