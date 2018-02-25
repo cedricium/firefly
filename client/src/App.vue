@@ -20,20 +20,16 @@ export default {
 </script>
 
 <style>
+body {
+  padding-top: 3.25rem;
+  background: #f9f9f9;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-
-html {
-  padding-top: 3.25rem;
-}
-
-html,
-body {
-  background: #f9f9f9;
 }
 
 a:hover { color: hsl(0, 0%, 15%); }

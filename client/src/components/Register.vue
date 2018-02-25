@@ -4,7 +4,7 @@
       <div class="columns">
         <div class="column is-4 is-offset-4">
           <div class="box">
-            <h1 class="title is-1 has-text-centered">Register</h1>
+            <h2 class="title is-2 has-text-centered">Register</h2>
             <b-field label="Name">
               <b-input
                 size="is-medium"

@@ -4,7 +4,7 @@
       <div class="columns">
         <div class="column is-4 is-offset-4">
           <div class="box">
-            <h1 class="title is-1 has-text-centered">Login</h1>
+            <h2 class="title is-2 has-text-centered">Login</h2>
             <b-field label="Email">
               <b-input
                 size="is-medium"
@@ -24,7 +24,8 @@
                 type="password"
                 name="password"
                 v-model="password"
-                placeholder="••••••••">
+                placeholder="••••••••"
+                password-reveal>
               </b-input>
             </b-field>
             <div class="content">
