@@ -22,7 +22,7 @@ export default {
 <style>
 body {
   padding-top: 3.25rem;
-  background: #f9f9f9;
+  background: #f9f9f9 url("./assets/background/geometry.png") repeat scroll 0% 0%;
 }
 
 #app {
