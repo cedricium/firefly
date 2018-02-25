@@ -15,11 +15,9 @@
           <p>Firefly is <span class="highlight">open-source</span>, ⭐️ it on GitHub:</p>
           <iframe src="https://ghbtns.com/github-btn.html?user=cedricium&repo=firefly&type=star&count=true&size=large"
             frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-          <br />
-          <small>Special thanks to <span class="highlight">Cody Seibert</span>
-            (<a href="https://www.twitter.com/codylseibert" target="_blank">@CodyLSeibert</a>)
-            for the awesome Vue.js / Express.js tutorial.
-          </small>
+          <p>Found an issue or want to make improvements to this app?
+            <a class="underline" href="https://github.com/cedricium/firefly/issues/new" target="_blank">Let us know!</a>
+          </p>
         </div>
         <div class="column is-4 info">
           <a href="https://bulma.io/" target="_blank">
@@ -32,6 +30,11 @@
           <br />
           <small>Website content licensed
             <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+          </small>
+          <br />
+          <small>Special thanks to <span class="highlight">Cody Seibert</span>
+            (<a href="https://www.twitter.com/codylseibert" target="_blank">@CodyLSeibert</a>)
+            for the awesome Vue.js / Express.js tutorial.
           </small>
         </div>
       </div>
@@ -95,7 +98,11 @@ div.column.info * {
 
 div.column.foss span.highlight {
   color: hsl(0, 0%, 15%);
-  font-weight: bold;
+  font-weight: 700;
+}
+
+div.column.foss a.underline {
+  text-decoration: underline;
 }
 
 div.column.info a.vue span.green { color: #42b883; }
