@@ -19,11 +19,13 @@ module.exports = {
                 [Op.like]: [`%${search}%`]
               }
             }))
-          }
+          },
+          order: [['createdAt', 'DESC']]
         });
       } else {
         sites = await Site.findAll({
-          limit: 15
+          limit: 15,
+          order: [['createdAt', 'DESC']]
         });
       }
       res.send(sites);
@@ -55,7 +57,8 @@ module.exports = {
               [Op.like]: [`%${tag}%`]
             }))
           }
-        }
+        },
+        order: [['createdAt', 'DESC']]
       });
       res.send(relatedSites);
     } catch (err) {

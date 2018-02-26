@@ -90,23 +90,18 @@ export default {
   },
   computed: {
     col1Sites () {
-      return this.sortSites.filter((el, index, array) => {
+      return this.sites.slice(0).filter((el, index, array) => {
         return (index % 3 === 0);
       });
     },
     col2Sites () {
-      return this.sortSites.filter((el, index, array) => {
+      return this.sites.slice(0).filter((el, index, array) => {
         return (index % 3 === 1);
       });
     },
     col3Sites () {
-      return this.sortSites.filter((el, index, array) => {
+      return this.sites.slice(0).filter((el, index, array) => {
         return (index % 3 === 2);
-      });
-    },
-    sortSites () {
-      return this.sites.slice(0).sort((a, b) => {
-        return a - b;
       });
     }
   },
