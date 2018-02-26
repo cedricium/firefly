@@ -2,57 +2,15 @@
   <div>
     <section class="section">
       <div class="container">
-        <div class="columns is-4 is-variable">
-          <div class="column is-4">
-            <div class="card"
-              v-for="site in col1Sites"
-              v-bind:key="site.id">
-              <div class="card-image">
-                <router-link :to="{name: 'site',
-                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
-                  <figure class="image is-16by9">
-                    <img :src="site.site_screenshot" alt="Placeholder image">
-                  </figure>
-                </router-link>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <router-link :to="{name: 'site',
-                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
-                    <strong v-text="site.title"></strong>
-                  </router-link>
-                  <p class="date is-size-7">added {{ site.createdAt | formatDate }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column is-4">
-            <div class="card"
-              v-for="site in col2Sites"
-              v-bind:key="site.id">
-              <div class="card-image">
-                <router-link :to="{name: 'site',
-                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
-                  <figure class="image is-16by9">
-                    <img :src="site.site_screenshot" alt="Placeholder image">
-                  </figure>
-                </router-link>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <router-link :to="{name: 'site',
-                  params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
-                    <strong v-text="site.title"></strong>
-                  </router-link>
-                  <p class="date is-size-7">added {{ site.createdAt | formatDate }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column is-4">
-            <div class="card"
-              v-for="site in col3Sites"
-              v-bind:key="site.id">
+    <!--
+      Fix layout on narrower layouts, fixes #7
+      Refs: https://bulma.io/documentation/layout/tiles/
+    -->
+        <div class="tile is-ancestor"
+          v-for="row in Math.ceil(sites.length / 3)" :key="row">
+          <div class="tile is-parent is-4"
+            v-for="(site, index) in sites.slice((row * 3) - 3, (row * 2) + row)" :key="index">
+            <div class="tile is-child card">
               <div class="card-image">
                 <router-link :to="{name: 'site',
                   params: { siteId: site.id, siteTitle: parseTitle(site.title) }}">
@@ -87,23 +45,6 @@ export default {
     return {
       sites: []
     };
-  },
-  computed: {
-    col1Sites () {
-      return this.sites.slice(0).filter((el, index, array) => {
-        return (index % 3 === 0);
-      });
-    },
-    col2Sites () {
-      return this.sites.slice(0).filter((el, index, array) => {
-        return (index % 3 === 1);
-      });
-    },
-    col3Sites () {
-      return this.sites.slice(0).filter((el, index, array) => {
-        return (index % 3 === 2);
-      });
-    }
   },
   methods: {
     parseTitle (title) {
