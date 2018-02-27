@@ -16,7 +16,7 @@
       </div>
 
       <div class="navbar-end">
-        <div class="navbar-item custom-grouped">
+        <div class="navbar-item grouped">
           <b-field>
             <b-input placeholder="Search..."
               v-model="search"
@@ -27,9 +27,7 @@
           </b-field>
         </div>
         <b-dropdown
-          class="navbar-item custom-grouped"
-          hoverable
-          v-show="$store.state.isUserLoggedIn">
+          class="navbar-item grouped">
           <button class="button is-white" slot="trigger">
             <b-icon
               size="is-small"
@@ -42,38 +40,69 @@
               icon="caret-down">
             </b-icon>
           </button>
-          <b-dropdown-item has-link>
-            <router-link :to="{name: ''}">
+          <!-- Dropdown menu contents -->
+          <div class="loggedIn-true"
+            v-show="$store.state.isUserLoggedIn">
+            <b-dropdown-item custom
+              v-if="$store.state.isUserLoggedIn">
+                Logged in as <b>{{ $store.state.user.name }}</b>
+            </b-dropdown-item>
+            <b-dropdown-item has-link>
+              <router-link :to="{name: ''}">
+                <b-icon
+                  size="is-small"
+                  pack="fa"
+                  icon="star">
+                </b-icon>
+                <span>Favorites</span>
+              </router-link>
+            </b-dropdown-item>
+            <b-dropdown-item has-link>
+              <router-link :to="{name: ''}">
+                <b-icon
+                  size="is-small"
+                  pack="fa"
+                  icon="gear">
+                </b-icon>
+                <span>Account</span>
+              </router-link>
+            </b-dropdown-item>
+            <hr class="dropdown-divider">
+            <b-dropdown-item
+              @click="logout">
               <b-icon
+                size="is-small"
                 pack="fa"
-                icon="star">
+                icon="sign-out">
               </b-icon>
-              <span>Favorites</span>
-            </router-link>
-          </b-dropdown-item>
-          <b-dropdown-item has-link>
-            <router-link :to="{name: ''}">
-              <b-icon
-                pack="fa"
-                icon="gear">
-              </b-icon>
-              <span>Account</span>
-            </router-link>
-          </b-dropdown-item>
-          <b-dropdown-item
-            separator>
-          </b-dropdown-item>
-          <b-dropdown-item
-            @click="logout">
-            <b-icon
-              pack="fa"
-              icon="sign-out">
-            </b-icon>
-            <span>Logout</span>
-          </b-dropdown-item>
+              <span>Logout</span>
+            </b-dropdown-item>
+          </div>
+          <div class="loggedIn-false"
+            v-show="!$store.state.isUserLoggedIn">
+            <b-dropdown-item has-link>
+              <router-link :to="{name: 'login'}">
+                <b-icon
+                  size="is-small"
+                  pack="fa"
+                  icon="sign-in">
+                </b-icon>
+                <span>Sign In</span>
+              </router-link>
+            </b-dropdown-item>
+            <b-dropdown-item has-link>
+              <router-link :to="{name: 'register'}">
+                <b-icon
+                  size="is-small"
+                  pack="fa"
+                  icon="user-plus">
+                </b-icon>
+                <span>Create Account</span>
+              </router-link>
+            </b-dropdown-item>
+          </div>
         </b-dropdown>
-        <div class="navbar-item custom-grouped custom-grouped__last"
-          v-show="$store.state.isUserLoggedIn">
+        <div class="navbar-item grouped">
           <button
             class="button is-primary"
             @click="cardModal">
@@ -84,21 +113,6 @@
             </b-icon>
             <span>Add Site</span>
           </button>
-        </div>
-        <div class="navbar-item"
-          v-show="!$store.state.isUserLoggedIn">
-          <div class="field is-grouped">
-            <p class="control">
-              <router-link class="button" :to="{name: 'login'}">
-                Sign In
-              </router-link>
-            </p>
-            <p class="control">
-              <router-link class="button is-primary" :to="{name: 'register'}">
-                Sign Up
-              </router-link>
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -117,11 +131,15 @@ export default {
   },
   methods: {
     cardModal () {
-      this.$modal.open({
-        parent: this,
-        component: AddSite,
-        hasModalCard: true
-      });
+      if (this.$store.state.isUserLoggedIn) {
+        this.$modal.open({
+          parent: this,
+          component: AddSite,
+          hasModalCard: true
+        });
+      } else { // redirect to login page
+        this.$router.push({name: 'login'});
+      }
     },
     searchSites () {
       const route = {
@@ -184,17 +202,17 @@ nav.navbar {
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
 }
 
-.navbar-item.custom-grouped {
-  padding: 8px 4px;
+.navbar-item.grouped {
+  padding: 8px 6px;
 }
 
-.navbar-item.custom-grouped__last {
+.navbar-item.grouped:last-of-type {
   padding-right: 16px;
 }
 
 /* Reset padding to original state to properly align in hamburger menu */
 @media screen and (max-width: 1020px) {
-  .navbar-item.custom-grouped {
+  .navbar-item.grouped {
     padding: 8px 16px;
   }
 }
