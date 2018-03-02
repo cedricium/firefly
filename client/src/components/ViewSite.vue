@@ -7,6 +7,22 @@
             class="title"
             v-text="site.title">
           </h1>
+          <span class="favorite"
+              v-if="this.$store.state.isUserLoggedIn"
+              @click="toggleFavorite">
+              <b-icon
+                size="is-medium"
+                v-show="!favorite"
+                pack="fa"
+                icon="star-o">
+              </b-icon>
+              <b-icon
+                size="is-medium"
+                v-show="favorite"
+                pack="fa"
+                icon="star">
+              </b-icon>
+            </span>
           <!-- <h2 class="subtitle">
             Primary subtitle
           </h2> -->
@@ -108,17 +124,30 @@
 <script>
 import moment from 'moment';
 import SitesService from '@/services/SitesService';
+import FavoritesService from '@/services/FavoritesService';
 
 export default {
   data () {
     return {
       site: {},
-      relatedSites: []
+      relatedSites: [],
+      favorite: null
     };
   },
-  mounted () {
+  async mounted () {
     const siteId = this.$store.state.route.params.siteId;
     this.loadSite(siteId);
+    if (this.$store.state.isUserLoggedIn) {
+      this.favorite = (await FavoritesService.index({
+        siteId: siteId,
+        userId: this.$store.state.user.id
+      })).data;
+      // XML Parsing error on Firefox when object is empty (i.e. no favorite found).
+      // This ensures that `this.favorite` will be null if no favorite is found.
+      if (Object.keys(this.favorite).length === 0) {
+        this.favorite = null;
+      }
+    }
   },
   methods: {
     parseTitle (title) {
@@ -128,6 +157,25 @@ export default {
       const siteId = id;
       this.site = (await SitesService.show(siteId)).data;
       this.relatedSites = (await SitesService.related(siteId)).data;
+    },
+    async toggleFavorite () {
+      if (this.favorite) { // delete favorite
+        try {
+          await FavoritesService.delete(this.favorite.id);
+          this.favorite = null;
+        } catch (err) {
+          console.log(err);
+        }
+      } else { // set favorite
+        try {
+          this.favorite = (await FavoritesService.post({
+            siteId: this.site.id,
+            userId: this.$store.state.user.id
+          })).data;
+        } catch (err) {
+          console.log(err);
+        }
+      }
     }
   },
   filters: {
@@ -141,6 +189,15 @@ export default {
 </script>
 
 <style scoped>
+h1.title,
+span.favorite {
+  display: inline;
+}
+
+span.favorite {
+  margin-left: 0.75rem;
+}
+
 .card-image {
   padding: 0.8rem;
 }
