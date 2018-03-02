@@ -137,17 +137,6 @@ export default {
   async mounted () {
     const siteId = this.$store.state.route.params.siteId;
     this.loadSite(siteId);
-    if (this.$store.state.isUserLoggedIn) {
-      this.favorite = (await FavoritesService.index({
-        siteId: siteId,
-        userId: this.$store.state.user.id
-      })).data;
-      // XML Parsing error on Firefox when object is empty (i.e. no favorite found).
-      // This ensures that `this.favorite` will be null if no favorite is found.
-      if (Object.keys(this.favorite).length === 0) {
-        this.favorite = null;
-      }
-    }
   },
   methods: {
     parseTitle (title) {
@@ -157,6 +146,17 @@ export default {
       const siteId = id;
       this.site = (await SitesService.show(siteId)).data;
       this.relatedSites = (await SitesService.related(siteId)).data;
+      if (this.$store.state.isUserLoggedIn) {
+        this.favorite = (await FavoritesService.index({
+          siteId: siteId,
+          userId: this.$store.state.user.id
+        })).data;
+        // XML Parsing error on Firefox when object is empty (i.e. no favorite found).
+        // This ensures that `this.favorite` will be null if no favorite is found.
+        if (Object.keys(this.favorite).length === 0) {
+          this.favorite = null;
+        }
+      }
     },
     async toggleFavorite () {
       if (this.favorite) { // delete favorite
